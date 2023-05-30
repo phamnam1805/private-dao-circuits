@@ -1,0 +1,14 @@
+{
+  "name": "private-dao-circuits",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:phamnam1805/private-dao-circuits.git",
+  "author": "Nam Phạm <nam.pv1805@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "circomlib": "^2.0.5",
+    "fixed-merkle-tree": "^0.7.3",
+    "snarkjs": "^0.7.0",
+    "circomlibjs": "git+https://github.com/tornadocash/circomlib.git#c372f14d324d57339c88451834bf2824e73bbdbc"
+  }
+}
