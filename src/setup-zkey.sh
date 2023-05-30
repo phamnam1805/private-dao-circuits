@@ -1,6 +1,6 @@
 #!/bin/bash
 FILE_NAME="result-verifier"
-PTAU_PATH="../build/ptau/pot14_final.ptau"
+PTAU_PATH="../build/ptau/pot13_final.ptau"
 ZKEY_PATH="../build/zkey"
 BUILD_PATH="../build/${FILE_NAME}"
 R1CS_PATH="${BUILD_PATH}/${FILE_NAME}.r1cs"
@@ -18,3 +18,4 @@ snarkjs zkey verify $R1CS_PATH $PTAU_PATH  "${ZKEY_PATH}/${FILE_NAME}_final.zkey
 snarkjs zkey export verificationkey "${ZKEY_PATH}/${FILE_NAME}_final.zkey" "${ZKEY_PATH}/${FILE_NAME}_verification-key.json"
 snarkjs zkey export solidityverifier "${ZKEY_PATH}/${FILE_NAME}_final.zkey" "${ZKEY_PATH}/${FILE_NAME}_verifier.sol"
 rm "${ZKEY_PATH}/${FILE_NAME}_0.zkey" "${ZKEY_PATH}/${FILE_NAME}_1.zkey" "${ZKEY_PATH}/${FILE_NAME}_2.zkey" "${ZKEY_PATH}/${FILE_NAME}_3.zkey" "${ZKEY_PATH}/challenge_phase2_0003" "${ZKEY_PATH}/response_phase2_0003"
+
