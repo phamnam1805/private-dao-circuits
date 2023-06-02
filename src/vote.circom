@@ -148,4 +148,4 @@ template Vote(d, levels){
     }
 }
 
-component main {public [pathRoot, idDAO, idProposal, publicKey, nullifierHash, R, M]} = Vote(3, 32);
+component main {public [pathRoot, idDAO, idProposal, publicKey, nullifierHash, R, M]} = Vote(3, 20);
