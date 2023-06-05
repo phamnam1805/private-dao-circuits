@@ -3,8 +3,8 @@ include "./libs/elgamal.circom";
 
 template Round2Contribution(t) {
     // public signal
-    signal input receiverIndex;
-    signal input receiverPublicKey[2];
+    signal input recipientIndex;
+    signal input recipientPublicKey[2];
     signal input C[t][2];
     signal input u[2];
     signal input c;
@@ -19,8 +19,8 @@ template Round2Contribution(t) {
     component elgamal = ElgamalEncrypt();
     elgamal.u[0] <== u[0];
     elgamal.u[1] <== u[1];
-    elgamal.publicKey[0] <== receiverPublicKey[0];
-    elgamal.publicKey[1] <== receiverPublicKey[1];
+    elgamal.publicKey[0] <== recipientPublicKey[0];
+    elgamal.publicKey[1] <== recipientPublicKey[1];
     elgamal.c <== c;
     elgamal.m <== f;
     elgamal.b <== b;
@@ -46,7 +46,7 @@ template Round2Contribution(t) {
         escalarMulRights[0].e[i] <== iBits[0].out[i];
     }
     for (var i = 1 ; i < t; i++) {
-        x = x * receiverIndex;
+        x = x * recipientIndex;
         iBits[i] = Num2Bits(256);
         escalarMulRights[i] = EscalarMulAny(256);
         iBits[i].in <-- x;
@@ -76,4 +76,37 @@ template Round2Contribution(t) {
     adder[t-1].yout === escalarMulLeft.out[1];
 }
 
-component main {public [receiverIndex, receiverPublicKey, C, u, c]} = Round2Contribution(3);
+template Round2Contributions(t, n) {
+    // public signal
+    signal input recipientIndexes[n-1];
+    signal input recipientPublicKeys[n-1][2];
+    signal input u[n-1][2];
+    signal input c[n-1];
+    signal input C[t][2];
+
+    // private signal
+    signal input f[n-1];
+    signal input b[n-1];
+
+    component round2Contributions[n-1];
+    
+    for(var i = 0; i < n-1; i++){
+        round2Contributions[i] = Round2Contribution(t);
+        round2Contributions[i].recipientIndex <== recipientIndexes[i];
+        round2Contributions[i].recipientPublicKey[0] <== recipientPublicKeys[i][0];
+        round2Contributions[i].recipientPublicKey[1] <== recipientPublicKeys[i][1];
+        for(var j = 0; j < t; j++){
+            round2Contributions[i].C[j][0] <== C[j][0];
+            round2Contributions[i].C[j][1] <== C[j][1];
+        }
+        round2Contributions[i].u[0] <== u[i][0];
+        round2Contributions[i].u[1] <== u[i][1];
+        round2Contributions[i].c <== c[i];
+        round2Contributions[i].f <== f[i];
+        round2Contributions[i].b <== b[i];
+    }
+}
+
+// component main {public [recipientIndex, recipientPublicKey, C, u, c]} = Round2Contribution(3);
+component main {public [recipientIndexes, recipientPublicKeys, u, c, C]} = Round2Contributions(3,5);
+
