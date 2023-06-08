@@ -1,5 +1,5 @@
 #!/bin/bash
-FILE_NAME="round-2-contribution"
+FILE_NAME="vote"
 INPUT_PATH="./${FILE_NAME}.circom"
 OUTPUT_PATH="../build/${FILE_NAME}"
 mkdir -p $OUTPUT_PATH

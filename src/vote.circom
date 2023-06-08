@@ -127,6 +127,7 @@ template Vote(d, levels){
     commitmentHasher.nullifierHash === nullifierHash;
 
     component tree = MerkleTreeChecker(levels);
+    log(commitmentHasher.commitment);
     tree.leaf <== commitmentHasher.commitment;
     tree.pathRoot <== pathRoot;
     for (var i = 0; i < levels; i++){
