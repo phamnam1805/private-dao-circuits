@@ -1,6 +1,6 @@
 #!/bin/bash
-FILE_NAME="multiple-leaves-insert"
-INPUT_PATH="./inputs/multiple-leaves-insert-input.json"
+FILE_NAME="hash-left-right"
+INPUT_PATH="./inputs/hash-left-right-input.json"
 BUILD_PATH="../build/${FILE_NAME}"
 CPP_PATH="${BUILD_PATH}/${FILE_NAME}_cpp"
 CPP_FILE_PATH="${CPP_PATH}/${FILE_NAME}"
