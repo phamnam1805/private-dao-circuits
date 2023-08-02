@@ -1,6 +1,6 @@
 #!/bin/bash
-FILE_NAME="vote"
-PTAU_PATH="../build/ptau/pot15_final.ptau"
+FILE_NAME="tally-contribution"
+PTAU_PATH="../build/ptau/pot16_final.ptau"
 ZKEY_PATH="../build/zkey"
 BUILD_PATH="../build/${FILE_NAME}"
 R1CS_PATH="${BUILD_PATH}/${FILE_NAME}.r1cs"
