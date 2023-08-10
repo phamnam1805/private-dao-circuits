@@ -36,6 +36,10 @@ template LagrangeCoefficient(t) {
     var jubSuborder = 2736030358979909402780800718157159386076813972158567259200215660948447373041;
 
     component inv[t];
+    // out[0] <-- 912010119659969800926933572719053128692271324052855753066738553649482457683;
+    // out[1] <-- 2736030358979909402780800718157159386076813972158567259200215660948447373039;
+    // out[2] <-- 1824020239319939601853867145438106257384542648105711506133477107298964915361;
+
     for(var indexI = 0 ; indexI < t; indexI++){
         var i = in[indexI];
         var numerator = 1;
@@ -66,7 +70,7 @@ template LagrangeCoefficient(t) {
 template ResultVerifier (d, t, n) {
     
     // public input
-    signal input listIndex[t];
+    signal input lagrangeCoefficient[t];
     signal input D[t][d][2];
     signal input M[d][2];
     signal input result[d];
@@ -76,14 +80,10 @@ template ResultVerifier (d, t, n) {
     var baseY = 16950150798460657717958625567821834550301663161624707787222815936182638968203;
     var field = 21888242871839275222246405745257275088548364400416034343698204186575808495617;
 
-    component  lagrangeCoefficient = LagrangeCoefficient(t);
-    for(var i = 0; i < t; i++){
-        lagrangeCoefficient.in[i] <== listIndex[i];
-    }
     component lagrangeCoefficientBits[t];
     for(var i = 0; i < t; i++){
         lagrangeCoefficientBits[i] = Num2Bits(256);
-        lagrangeCoefficientBits[i].in <== lagrangeCoefficient.out[i];
+        lagrangeCoefficientBits[i].in <== lagrangeCoefficient[i];
     }
 
     var sumDx[d];
@@ -144,4 +144,4 @@ template ResultVerifier (d, t, n) {
     }
 }
 
-component main {public [listIndex, D, M, result]} = ResultVerifier(3,3,5);
+component main {public [lagrangeCoefficient, D, M, result]} = ResultVerifier(3,3,5);
